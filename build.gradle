@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0' // Добавляем плагин Allure
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+dependencies {
+    //JUnit 5
+    implementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    //RestAssured
+    implementation 'io.rest-assured:rest-assured:5.5.1' //testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.1'
+
+    //JSON parser
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
+
+    //AssertJ
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
+
+    // Logback (реализация SLF4J)
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+
+    // SLF4J API
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+
+    // Allure для JUnit 5
+    testImplementation("io.qameta.allure:allure-junit5:2.12.0")
+
+    // selenium
+    implementation("org.seleniumhq.selenium:selenium-java:4.31.0")
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'allure.results.directory', "$buildDir/allure-results" // Указываем Allure, где сохранять результаты
+    testLogging {
+        events 'passed', 'skipped', 'failed' // Логирование результатов тестов
+    }
+}
