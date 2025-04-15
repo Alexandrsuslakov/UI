@@ -6,8 +6,7 @@ import Configuration;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import static Selenide.closeWebDriver;
-
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class BaseTest {
 
