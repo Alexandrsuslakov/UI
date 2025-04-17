@@ -12,9 +12,10 @@ public class LoginPage extends BaseTest {
     private SelenideElement loginInput = $("[name='st.email']");
     private SelenideElement passInput = $("[name='st.password']");
     private SelenideElement loginButton = $("[data-l='t,sign_in']");
-    private SelenideElement forgotPasswordLink  = $("[data-l='t,restore']");
-    private SelenideElement registrationButton  = $("[tsid='login-block21_input_9ad800']");
-
+    private SelenideElement forgotPasswordLink = $("[data-l='t,restore']");
+    private SelenideElement registrationButton = $("[tsid='login-block21_input_9ad800']");
+    private SelenideElement recoveryButton = $("[name='st.go_to_recovery']");
+    private SelenideElement comeBackButton = $("[class='button-pro __sec __wide js-login-nav']");
 
     // Кнопки соц.сетей
     private SelenideElement vkButton = $("[data-module='registration/vkconnect']");
@@ -27,7 +28,7 @@ public class LoginPage extends BaseTest {
     }
 
     @Step("Проверяем видимость элементов на странице")
-    public void verifyPageElements() {
+    private void verifyPageElements() {
         loginInput.shouldBe(visible);
         passInput.shouldBe(visible);
         loginButton.shouldBe(visible);
@@ -40,12 +41,12 @@ public class LoginPage extends BaseTest {
     }
 
     @Step("Проверяет видимость сообщения об ошибке входа")
-    public boolean isErrorMessageVisible(){
+    public boolean isErrorMessageVisible() {
         return errorMessage.shouldBe(visible).exists();
     }
 
     @Step("Получает текст сообщения об ошибке входа")
-    public String getErrorMessageVisible(){
+    public String getErrorMessageVisible() {
         return errorMessage.shouldBe(visible).getText();
     }
 
@@ -55,24 +56,25 @@ public class LoginPage extends BaseTest {
         loginInput.shouldBe(visible).setValue(username);
         passInput.shouldBe(visible).click();
         passInput.shouldBe(visible).setValue(password);
-        loginButton.shouldBe(visible).click();
+        clickLogin();
     }
 
     @Step("Попытка входа на сайт только с логином")
     public void loginOnlyLogin(String username) {
         loginInput.shouldBe(visible).click();
         loginInput.shouldBe(visible).setValue(username);
-        loginButton.shouldBe(visible).click();
+        clickLogin();
     }
 
     @Step("Попытка входа на сайт только с паролем")
     public void loginOnlyPass(String password) {
         passInput.shouldBe(visible).click();
         passInput.shouldBe(visible).setValue(password);
-        loginButton.shouldBe(visible).click();
+        clickLogin();
     }
+
     @Step("Переход на страницу регистрации")
-    public void openRegistrationPage(){
+    public void openRegistrationPage() {
         registrationButton.shouldBe(visible).click();
     }
 
@@ -89,5 +91,28 @@ public class LoginPage extends BaseTest {
     @Step("Переход на страницу Mail")
     public void openMailPage() {
         mailButton.shouldBe(visible).click();
+    }
+
+    @Step("Переход на страницу восстановления")
+    public void openRecoveryPage() {
+        recoveryButton.shouldBe(visible).click();
+    }
+
+    @Step("Переход на страницу авторизации")
+    public void openLoginPage(String username) {
+        comeBackButton.shouldBe(visible).click();
+    }
+
+    public void clickLogin() {
+        loginButton.shouldBe(visible).click();
+    }
+
+    public void goToRecoveryPage() {                            //Уместно ли создавать такую функцию??? Я ее использую в трех тестах
+        login("incorrectUser", "incorrectPassword");
+
+        for (int i = 0; i < 2; i++) {
+            loginOnlyPass("1");
+        }
+        openRecoveryPage();
     }
 }

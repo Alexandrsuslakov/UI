@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginOnlyUsername extends BaseTest {
+public class LoginOnlyUsernameTest extends BaseTest {
     private static LoginPage loginPage;
 
     @BeforeEach
