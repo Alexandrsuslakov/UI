@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginOnlyPass extends BaseTest {
+public class LoginWithLoginWrongCredentialsTest extends BaseTest {
     private static LoginPage loginPage;
 
     @BeforeEach
@@ -18,10 +18,10 @@ public class LoginOnlyPass extends BaseTest {
     }
 
     @Test
-    public void loginOnlyPassTest(){
-        loginPage.loginOnlyPass("incorrectUser");
+    public void loginTest(){
+        loginPage.login("incorrectUser","incorrectPassword");
 
         assertTrue(loginPage.isErrorMessageVisible(),"Сообщение об ошибке входа не отображается");
-        assertEquals(loginPage.getErrorMessageVisible(),"Введите логин","Сообщение об ошибке не соответствует ожидаемому");
+        assertEquals(loginPage.getErrorMessageVisible(),"Неправильно указан логин и/или пароль","Сообщение об ошибке не соответствует ожидаемому");
     }
 }
