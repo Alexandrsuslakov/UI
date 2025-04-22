@@ -2,6 +2,7 @@ package core.base.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,6 +12,8 @@ public class RecoveryPhonePage extends BasePage {
     private SelenideElement phoneInput = $("[name='st.r.phone']");
     private SelenideElement getCodeButton = $("[data-l='t,submit']");
     private SelenideElement countryDropdown= $("[data-popular-locale='Популярные']");
+    private  SelenideElement errorMessage = $("[class='input-e js-ph-vl-hint']");
+
 
     {
         verifyPageElements();
@@ -31,5 +34,19 @@ public class RecoveryPhonePage extends BasePage {
         return countryCode;
 
     }
+    @Step("Нажимает кнопку 'Получить код'")
+    public void clickButton(){
+        getCodeButton.shouldBe(visible).click();
+    }
+    @Step("Проверяет видимость сообщения об ошибке входа")
+    public boolean isErrorMessageVisible() {
+        return errorMessage.shouldBe(visible).exists();
+    }
+
+    @Step("Получает текст сообщения об ошибке входа")
+    public String getErrorMessageVisible() {
+        return errorMessage.shouldBe(visible).getText();
+    }
+
 }
 
