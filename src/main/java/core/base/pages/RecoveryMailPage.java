@@ -19,3 +19,4 @@ public class RecoveryMailPage extends BasePage {
         getCodeButton.shouldBe(visible);
     }
 }
+                            
