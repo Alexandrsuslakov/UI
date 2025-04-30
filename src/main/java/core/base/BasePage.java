@@ -12,10 +12,10 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class BasePage {
     //Общие элементы, которые могут использоваться на разных страницах
-    protected SelenideElement headerLogo = $("[class= 'toolbar_logo_img']");
-    protected SelenideElement searchField = $("[class= 'input__prt1l __size-m__prt1l input__mofy2 input-field__on39s __right-icon__on39s __redesigned__on39s']");
+    protected SelenideElement headerLogo = $("[data-l= 't,logo']");
+    protected SelenideElement searchField = $("[data-tsid= 'toolbar-search-input']");
     protected SelenideElement vkServices = $("[data-l= 't,vk_ecosystem']");
-    protected SelenideElement acceptAll = $("[class= 'button-pro __solid-white cb_accept js-cb_accept']");
+    protected SelenideElement acceptAll = $("[tsid= 'cookie-banner_button_2e0c18']");
 
     {
         verifyPageElements();

@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SearchStringTest extends BaseTest {
-    private static LoginPage loginPage;
-    private static GroupPage groupPage;
+    private  LoginPage loginPage;
+    private  GroupPage groupPage;
 
     @BeforeEach
     public void prepare(){
@@ -27,7 +27,5 @@ public class SearchStringTest extends BaseTest {
         loginPage.foundQATraining("Тестировщик");
         groupPage = new GroupPage();
 
-        //assertTrue(loginPage.isErrorMessageVisible(),"Сообщение об ошибке входа не отображается");
-        //assertEquals(loginPage.getErrorMessageVisible(),"Введите логин","Сообщение об ошибке не соответствует ожидаемому");
     }
 }
