@@ -1,13 +1,14 @@
 package core.base.pages;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 import com.codeborne.selenide.SelenideElement;
-import core.base.BaseTest;
+import core.base.BasePage;
 import io.qameta.allure.Step;
 
 
-public class LoginPage extends BaseTest {
+public class LoginPage extends BasePage {
 
     private SelenideElement loginInput = $("[name='st.email']");
     private SelenideElement passInput = $("[name='st.password']");
@@ -16,6 +17,8 @@ public class LoginPage extends BaseTest {
     private SelenideElement registrationButton = $("[tsid='login-block21_input_9ad800']");
     private SelenideElement recoveryButton = $("[name='st.go_to_recovery']");
     private SelenideElement comeBackButton = $("[class='button-pro __sec __wide js-login-nav']");
+    private SelenideElement qrButton = $("[data-l='t,qr_tab']");
+    private SelenideElement sqaTrainingLink = $x("//a[text()='Курсы по тестированию - SQA Training']");
 
     // Кнопки соц.сетей
     private SelenideElement vkButton = $("[data-module='registration/vkconnect']");
@@ -37,12 +40,17 @@ public class LoginPage extends BaseTest {
         vkButton.shouldBe(visible);
         mailButton.shouldBe(visible);
         yandexButton.shouldBe(visible);
+        qrButton.shouldBe(visible);
+    }
 
+    @Step("Нажимает кнопку 'Неполучается войти?'")
+    public void clickForgotPasswordLink() {
+        forgotPasswordLink.shouldBe(visible).click();
     }
 
     @Step("Проверяет видимость сообщения об ошибке входа")
     public boolean isErrorMessageVisible() {
-        return errorMessage.shouldBe(visible).exists();
+        return errorMessage.isDisplayed();
     }
 
     @Step("Получает текст сообщения об ошибке входа")
@@ -93,6 +101,11 @@ public class LoginPage extends BaseTest {
         mailButton.shouldBe(visible).click();
     }
 
+    @Step("Переход на страницу авторизации по QR-коду")
+    public void openQrPage() {
+        qrButton.shouldBe(visible).click();
+    }
+
     @Step("Переход на страницу восстановления")
     public void openRecoveryPage() {
         recoveryButton.shouldBe(visible).click();
@@ -114,5 +127,12 @@ public class LoginPage extends BaseTest {
             loginOnlyPass("1");
         }
         openRecoveryPage();
+    }
+
+    @Step("Ввод значения в строку поиска")
+    public void foundQATraining(String request) {
+        searchField.shouldBe(visible).click();
+        searchField.shouldBe(visible).setValue(request);
+        sqaTrainingLink.shouldBe(visible).click();
     }
 }
