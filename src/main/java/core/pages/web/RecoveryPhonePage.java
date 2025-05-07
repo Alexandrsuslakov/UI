@@ -1,4 +1,4 @@
-package core.base.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
 import core.base.BasePage;
@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class RecoveryPhonePage extends BasePage {
     private SelenideElement phoneInput = $("[name='st.r.phone']");

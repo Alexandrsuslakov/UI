@@ -1,7 +1,7 @@
-package tests;
+package tests.web;
 import core.base.BaseTest;
-import core.base.pages.LoginPage;
-import core.base.pages.QrPage;
+import core.pages.web.LoginPage;
+import core.pages.web.QrPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

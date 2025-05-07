@@ -1,4 +1,4 @@
-package core.base.pages;
+package core.pages.web;
 
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.visible;
